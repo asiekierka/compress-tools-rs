@@ -139,7 +139,7 @@ impl<R: Read + Seek> ArchiveIterator<R> {
                 )?;
 
                 archive_result(
-                    ffi::archive_read_support_format_raw(archive_reader),
+                    ffi::archive_read_support_format_all(archive_reader),
                     archive_reader,
                 )?;
 
@@ -154,11 +154,6 @@ impl<R: Read + Seek> ArchiveIterator<R> {
                 if archive_reader.is_null() {
                     return Err(Error::NullArchive);
                 }
-
-                archive_result(
-                    ffi::archive_read_support_format_all(archive_reader),
-                    archive_reader,
-                )?;
 
                 archive_result(
                     ffi::archive_read_open(
